@@ -1,0 +1,1304 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище AtelierModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Accessories">
+          <Key>
+            <PropertyRef Name="ID_Accessories" />
+          </Key>
+          <Property Name="ID_Accessories" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Material" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_Color_Accessories" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Authorization">
+          <Key>
+            <PropertyRef Name="ID_Authorization" />
+          </Key>
+          <Property Name="ID_Authorization" Type="int" Nullable="false" />
+          <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID_Clients" />
+          </Key>
+          <Property Name="ID_Clients" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ID_Authorization" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="Mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone_number" Type="int" Nullable="false" />
+          <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cloth">
+          <Key>
+            <PropertyRef Name="ID_Cloth" />
+          </Key>
+          <Property Name="ID_Cloth" Type="int" Nullable="false" />
+          <Property Name="ID_Color" Type="int" Nullable="false" />
+          <Property Name="ID_Resistance" Type="int" Nullable="false" />
+          <Property Name="ID_Density" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID_Color" />
+          </Key>
+          <Property Name="ID_Color" Type="int" Nullable="false" />
+          <Property Name="Color" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Color_Accessories">
+          <Key>
+            <PropertyRef Name="ID_Color_Accessories" />
+          </Key>
+          <Property Name="ID_Color_Accessories" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Density">
+          <Key>
+            <PropertyRef Name="ID_Density" />
+          </Key>
+          <Property Name="ID_Density" Type="int" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="ID_Equipment" />
+          </Key>
+          <Property Name="ID_Equipment" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="Date of purchase" Type="date" Nullable="false" />
+          <Property Name="Year of release" Type="int" Nullable="false" />
+          <Property Name="Speed" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stitch Length" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Stitch Widths" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Size of the loop strip" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Connecting to a computer" Type="bit" Nullable="false" />
+          <Property Name="Automatic winding" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="ID_Models" />
+          </Key>
+          <Property Name="ID_Models" Type="int" Nullable="false" />
+          <Property Name="ID_Cloth" Type="int" Nullable="false" />
+          <Property Name="ID_Season" Type="int" Nullable="false" />
+          <Property Name="ID_Status model" Type="int" Nullable="false" />
+          <Property Name="ID_Accessories" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Purpose" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Size" Type="int" Nullable="false" />
+          <Property Name="Lining" Type="bit" Nullable="false" />
+          <Property Name="Belt" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="More">
+          <Key>
+            <PropertyRef Name="ID_More" />
+          </Key>
+          <Property Name="ID_More" Type="int" Nullable="false" />
+          <Property Name="ID_Models" Type="int" Nullable="false" />
+          <Property Name="ID_Cloth" Type="int" Nullable="false" />
+          <Property Name="ID_Accessories" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ordedrs">
+          <Key>
+            <PropertyRef Name="ID_Orders" />
+          </Key>
+          <Property Name="ID_Orders" Type="int" Nullable="false" />
+          <Property Name="ID_Staff" Type="int" Nullable="false" />
+          <Property Name="ID_Clients" Type="int" Nullable="false" />
+          <Property Name="ID_Models" Type="int" />
+          <Property Name="Type" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="money" Nullable="false" />
+          <Property Name="Cheque" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Warranty" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Queue">
+          <Key>
+            <PropertyRef Name="ID_Queue" />
+          </Key>
+          <Property Name="ID_Queue" Type="int" Nullable="false" />
+          <Property Name="ID_Orders" Type="int" Nullable="false" />
+          <Property Name="ID_Status order" Type="int" Nullable="false" />
+          <Property Name="Urgency" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Repair requests">
+          <Key>
+            <PropertyRef Name="ID_Repair requests" />
+          </Key>
+          <Property Name="ID_Repair requests" Type="int" Nullable="false" />
+          <Property Name="ID_Equipment" Type="int" Nullable="false" />
+          <Property Name="ID_Staff" Type="int" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Name organization" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="The nature of the fault" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Resistance">
+          <Key>
+            <PropertyRef Name="ID_Resistance" />
+          </Key>
+          <Property Name="ID_Resistance" Type="int" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="ID_Season" />
+          </Key>
+          <Property Name="ID_Season" Type="int" Nullable="false" />
+          <Property Name="Time of year" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID_Staff" />
+          </Key>
+          <Property Name="ID_Staff" Type="int" Nullable="false" />
+          <Property Name="ID_Authorization" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Patronymic" Type="varchar" MaxLength="50" />
+          <Property Name="Birthday" Type="date" Nullable="false" />
+          <Property Name="Busyness" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Phone number" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status model">
+          <Key>
+            <PropertyRef Name="ID_Status model" />
+          </Key>
+          <Property Name="ID_Status model" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status order">
+          <Key>
+            <PropertyRef Name="ID_Status order" />
+          </Key>
+          <Property Name="ID_Status order" Type="int" Nullable="false" />
+          <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Accessories_Color_Accessories">
+          <End Role="Color_Accessories" Type="Self.Color_Accessories" Multiplicity="1" />
+          <End Role="Accessories" Type="Self.Accessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color_Accessories">
+              <PropertyRef Name="ID_Color_Accessories" />
+            </Principal>
+            <Dependent Role="Accessories">
+              <PropertyRef Name="ID_Color_Accessories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Authorization">
+          <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorization">
+              <PropertyRef Name="ID_Authorization" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="ID_Authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cloth_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="1" />
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ID_Color" />
+            </Principal>
+            <Dependent Role="Cloth">
+              <PropertyRef Name="ID_Color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cloth_Density">
+          <End Role="Density" Type="Self.Density" Multiplicity="1" />
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Density">
+              <PropertyRef Name="ID_Density" />
+            </Principal>
+            <Dependent Role="Cloth">
+              <PropertyRef Name="ID_Density" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cloth_Resistance">
+          <End Role="Resistance" Type="Self.Resistance" Multiplicity="1" />
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resistance">
+              <PropertyRef Name="ID_Resistance" />
+            </Principal>
+            <Dependent Role="Cloth">
+              <PropertyRef Name="ID_Resistance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Models_Cloth">
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cloth">
+              <PropertyRef Name="ID_Cloth" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="ID_Cloth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Models_Season">
+          <End Role="Season" Type="Self.Season" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="ID_Season" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="ID_Season" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Models_Status model">
+          <End Role="Status model" Type="Self.Status model" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status model">
+              <PropertyRef Name="ID_Status model" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="ID_Status model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_More_Accessories">
+          <End Role="Accessories" Type="Self.Accessories" Multiplicity="1" />
+          <End Role="More" Type="Self.More" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessories">
+              <PropertyRef Name="ID_Accessories" />
+            </Principal>
+            <Dependent Role="More">
+              <PropertyRef Name="ID_Accessories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_More_Cloth">
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="1" />
+          <End Role="More" Type="Self.More" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cloth">
+              <PropertyRef Name="ID_Cloth" />
+            </Principal>
+            <Dependent Role="More">
+              <PropertyRef Name="ID_Cloth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_More_Models">
+          <End Role="Models" Type="Self.Models" Multiplicity="1" />
+          <End Role="More" Type="Self.More" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="ID_Models" />
+            </Principal>
+            <Dependent Role="More">
+              <PropertyRef Name="ID_Models" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordedrs_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID_Clients" />
+            </Principal>
+            <Dependent Role="Ordedrs">
+              <PropertyRef Name="ID_Clients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordedrs_Models">
+          <End Role="Models" Type="Self.Models" Multiplicity="0..1" />
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="ID_Models" />
+            </Principal>
+            <Dependent Role="Ordedrs">
+              <PropertyRef Name="ID_Models" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordedrs_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_Staff" />
+            </Principal>
+            <Dependent Role="Ordedrs">
+              <PropertyRef Name="ID_Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Queue_Ordedrs">
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="1" />
+          <End Role="Queue" Type="Self.Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordedrs">
+              <PropertyRef Name="ID_Orders" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="ID_Orders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Queue_Status">
+          <End Role="Status order" Type="Self.Status order" Multiplicity="1" />
+          <End Role="Queue" Type="Self.Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status order">
+              <PropertyRef Name="ID_Status order" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="ID_Status order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repair requests_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="Repair requests" Type="Self.Repair requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="ID_Equipment" />
+            </Principal>
+            <Dependent Role="Repair requests">
+              <PropertyRef Name="ID_Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repair requests_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Repair requests" Type="Self.Repair requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_Staff" />
+            </Principal>
+            <Dependent Role="Repair requests">
+              <PropertyRef Name="ID_Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Authorization">
+          <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorization">
+              <PropertyRef Name="ID_Authorization" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="ID_Authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище AtelierModelContainer">
+          <EntitySet Name="Accessories" EntityType="Self.Accessories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Authorization" EntityType="Self.Authorization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cloth" EntityType="Self.Cloth" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color" EntityType="Self.Color" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Color_Accessories" EntityType="Self.Color_Accessories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Density" EntityType="Self.Density" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Models" EntityType="Self.Models" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="More" EntityType="Self.More" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ordedrs" EntityType="Self.Ordedrs" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Queue" EntityType="Self.Queue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Repair requests" EntityType="Self.Repair requests" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Resistance" EntityType="Self.Resistance" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Season" EntityType="Self.Season" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status model" EntityType="Self.Status model" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status order" EntityType="Self.Status order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Accessories_Color_Accessories" Association="Self.FK_Accessories_Color_Accessories">
+            <End Role="Color_Accessories" EntitySet="Color_Accessories" />
+            <End Role="Accessories" EntitySet="Accessories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Authorization" Association="Self.FK_Clients_Authorization">
+            <End Role="Authorization" EntitySet="Authorization" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cloth_Color" Association="Self.FK_Cloth_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Cloth" EntitySet="Cloth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cloth_Density" Association="Self.FK_Cloth_Density">
+            <End Role="Density" EntitySet="Density" />
+            <End Role="Cloth" EntitySet="Cloth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cloth_Resistance" Association="Self.FK_Cloth_Resistance">
+            <End Role="Resistance" EntitySet="Resistance" />
+            <End Role="Cloth" EntitySet="Cloth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Models_Cloth" Association="Self.FK_Models_Cloth">
+            <End Role="Cloth" EntitySet="Cloth" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Models_Season" Association="Self.FK_Models_Season">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Models_Status model" Association="Self.FK_Models_Status model">
+            <End Role="Status model" EntitySet="Status model" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_More_Accessories" Association="Self.FK_More_Accessories">
+            <End Role="Accessories" EntitySet="Accessories" />
+            <End Role="More" EntitySet="More" />
+          </AssociationSet>
+          <AssociationSet Name="FK_More_Cloth" Association="Self.FK_More_Cloth">
+            <End Role="Cloth" EntitySet="Cloth" />
+            <End Role="More" EntitySet="More" />
+          </AssociationSet>
+          <AssociationSet Name="FK_More_Models" Association="Self.FK_More_Models">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="More" EntitySet="More" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordedrs_Clients" Association="Self.FK_Ordedrs_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordedrs_Models" Association="Self.FK_Ordedrs_Models">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordedrs_Staff" Association="Self.FK_Ordedrs_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Queue_Ordedrs" Association="Self.FK_Queue_Ordedrs">
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+            <End Role="Queue" EntitySet="Queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Queue_Status" Association="Self.FK_Queue_Status">
+            <End Role="Status order" EntitySet="Status order" />
+            <End Role="Queue" EntitySet="Queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repair requests_Equipment" Association="Self.FK_Repair requests_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Repair requests" EntitySet="Repair requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repair requests_Staff" Association="Self.FK_Repair requests_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Repair requests" EntitySet="Repair requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Authorization" Association="Self.FK_Staff_Authorization">
+            <End Role="Authorization" EntitySet="Authorization" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="AtelierModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Accessories">
+          <Key>
+            <PropertyRef Name="ID_Accessories" />
+          </Key>
+          <Property Name="ID_Accessories" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Material" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_Color_Accessories" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Color_Accessories" Relationship="Self.FK_Accessories_Color_Accessories" FromRole="Accessories" ToRole="Color_Accessories" />
+          <NavigationProperty Name="More" Relationship="Self.FK_More_Accessories" FromRole="Accessories" ToRole="More" />
+        </EntityType>
+        <EntityType Name="Authorization">
+          <Key>
+            <PropertyRef Name="ID_Authorization" />
+          </Key>
+          <Property Name="ID_Authorization" Type="Int32" Nullable="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Clients_Authorization" FromRole="Authorization" ToRole="Clients" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Staff_Authorization" FromRole="Authorization" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Clients">
+          <Key>
+            <PropertyRef Name="ID_Clients" />
+          </Key>
+          <Property Name="ID_Clients" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ID_Authorization" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_number" Type="Int32" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Authorization" Relationship="Self.FK_Clients_Authorization" FromRole="Clients" ToRole="Authorization" />
+          <NavigationProperty Name="Ordedrs" Relationship="Self.FK_Ordedrs_Clients" FromRole="Clients" ToRole="Ordedrs" />
+        </EntityType>
+        <EntityType Name="Cloth">
+          <Key>
+            <PropertyRef Name="ID_Cloth" />
+          </Key>
+          <Property Name="ID_Cloth" Type="Int32" Nullable="false" />
+          <Property Name="ID_Color" Type="Int32" Nullable="false" />
+          <Property Name="ID_Resistance" Type="Int32" Nullable="false" />
+          <Property Name="ID_Density" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Color" Relationship="Self.FK_Cloth_Color" FromRole="Cloth" ToRole="Color" />
+          <NavigationProperty Name="Density" Relationship="Self.FK_Cloth_Density" FromRole="Cloth" ToRole="Density" />
+          <NavigationProperty Name="Resistance" Relationship="Self.FK_Cloth_Resistance" FromRole="Cloth" ToRole="Resistance" />
+          <NavigationProperty Name="Models" Relationship="Self.FK_Models_Cloth" FromRole="Cloth" ToRole="Models" />
+          <NavigationProperty Name="More" Relationship="Self.FK_More_Cloth" FromRole="Cloth" ToRole="More" />
+        </EntityType>
+        <EntityType Name="Color">
+          <Key>
+            <PropertyRef Name="ID_Color" />
+          </Key>
+          <Property Name="ID_Color" Type="Int32" Nullable="false" />
+          <Property Name="Color1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cloth" Relationship="Self.FK_Cloth_Color" FromRole="Color" ToRole="Cloth" />
+        </EntityType>
+        <EntityType Name="Color_Accessories">
+          <Key>
+            <PropertyRef Name="ID_Color_Accessories" />
+          </Key>
+          <Property Name="ID_Color_Accessories" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Accessories" Relationship="Self.FK_Accessories_Color_Accessories" FromRole="Color_Accessories" ToRole="Accessories" />
+        </EntityType>
+        <EntityType Name="Density">
+          <Key>
+            <PropertyRef Name="ID_Density" />
+          </Key>
+          <Property Name="ID_Density" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cloth" Relationship="Self.FK_Cloth_Density" FromRole="Density" ToRole="Cloth" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="ID_Equipment" />
+          </Key>
+          <Property Name="ID_Equipment" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Date_of_purchase" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Year_of_release" Type="Int32" Nullable="false" />
+          <Property Name="Speed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Stitch_Length" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Stitch_Widths" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Size_of_the_loop_strip" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Connecting_to_a_computer" Type="Boolean" Nullable="false" />
+          <Property Name="Automatic_winding" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Repair_requests" Relationship="Self.FK_Repair_requests_Equipment" FromRole="Equipment" ToRole="Repair_requests" />
+        </EntityType>
+        <EntityType Name="Models">
+          <Key>
+            <PropertyRef Name="ID_Models" />
+          </Key>
+          <Property Name="ID_Models" Type="Int32" Nullable="false" />
+          <Property Name="ID_Cloth" Type="Int32" Nullable="false" />
+          <Property Name="ID_Season" Type="Int32" Nullable="false" />
+          <Property Name="ID_Status_model" Type="Int32" Nullable="false" />
+          <Property Name="ID_Accessories" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Purpose" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Size" Type="Int32" Nullable="false" />
+          <Property Name="Lining" Type="Boolean" Nullable="false" />
+          <Property Name="Belt" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cloth" Relationship="Self.FK_Models_Cloth" FromRole="Models" ToRole="Cloth" />
+          <NavigationProperty Name="Season" Relationship="Self.FK_Models_Season" FromRole="Models" ToRole="Season" />
+          <NavigationProperty Name="Status_model" Relationship="Self.FK_Models_Status_model" FromRole="Models" ToRole="Status_model" />
+          <NavigationProperty Name="More" Relationship="Self.FK_More_Models" FromRole="Models" ToRole="More" />
+          <NavigationProperty Name="Ordedrs" Relationship="Self.FK_Ordedrs_Models" FromRole="Models" ToRole="Ordedrs" />
+        </EntityType>
+        <EntityType Name="More">
+          <Key>
+            <PropertyRef Name="ID_More" />
+          </Key>
+          <Property Name="ID_More" Type="Int32" Nullable="false" />
+          <Property Name="ID_Models" Type="Int32" Nullable="false" />
+          <Property Name="ID_Cloth" Type="Int32" Nullable="false" />
+          <Property Name="ID_Accessories" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Accessories" Relationship="Self.FK_More_Accessories" FromRole="More" ToRole="Accessories" />
+          <NavigationProperty Name="Cloth" Relationship="Self.FK_More_Cloth" FromRole="More" ToRole="Cloth" />
+          <NavigationProperty Name="Models" Relationship="Self.FK_More_Models" FromRole="More" ToRole="Models" />
+        </EntityType>
+        <EntityType Name="Ordedrs">
+          <Key>
+            <PropertyRef Name="ID_Orders" />
+          </Key>
+          <Property Name="ID_Orders" Type="Int32" Nullable="false" />
+          <Property Name="ID_Staff" Type="Int32" Nullable="false" />
+          <Property Name="ID_Clients" Type="Int32" Nullable="false" />
+          <Property Name="ID_Models" Type="Int32" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Price" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="Cheque" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Warranty" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Clients" Relationship="Self.FK_Ordedrs_Clients" FromRole="Ordedrs" ToRole="Clients" />
+          <NavigationProperty Name="Models" Relationship="Self.FK_Ordedrs_Models" FromRole="Ordedrs" ToRole="Models" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Ordedrs_Staff" FromRole="Ordedrs" ToRole="Staff" />
+          <NavigationProperty Name="Queue" Relationship="Self.FK_Queue_Ordedrs" FromRole="Ordedrs" ToRole="Queue" />
+        </EntityType>
+        <EntityType Name="Queue">
+          <Key>
+            <PropertyRef Name="ID_Queue" />
+          </Key>
+          <Property Name="ID_Queue" Type="Int32" Nullable="false" />
+          <Property Name="ID_Orders" Type="Int32" Nullable="false" />
+          <Property Name="ID_Status_order" Type="Int32" Nullable="false" />
+          <Property Name="Urgency" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Ordedrs" Relationship="Self.FK_Queue_Ordedrs" FromRole="Queue" ToRole="Ordedrs" />
+          <NavigationProperty Name="Status_order" Relationship="Self.FK_Queue_Status" FromRole="Queue" ToRole="Status_order" />
+        </EntityType>
+        <EntityType Name="Repair_requests">
+          <Key>
+            <PropertyRef Name="ID_Repair_requests" />
+          </Key>
+          <Property Name="ID_Repair_requests" Type="Int32" Nullable="false" />
+          <Property Name="ID_Equipment" Type="Int32" Nullable="false" />
+          <Property Name="ID_Staff" Type="Int32" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Name_organization" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="The_nature_of_the_fault" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Equipment" Relationship="Self.FK_Repair_requests_Equipment" FromRole="Repair_requests" ToRole="Equipment" />
+          <NavigationProperty Name="Staff" Relationship="Self.FK_Repair_requests_Staff" FromRole="Repair_requests" ToRole="Staff" />
+        </EntityType>
+        <EntityType Name="Resistance">
+          <Key>
+            <PropertyRef Name="ID_Resistance" />
+          </Key>
+          <Property Name="ID_Resistance" Type="Int32" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Cloth" Relationship="Self.FK_Cloth_Resistance" FromRole="Resistance" ToRole="Cloth" />
+        </EntityType>
+        <EntityType Name="Season">
+          <Key>
+            <PropertyRef Name="ID_Season" />
+          </Key>
+          <Property Name="ID_Season" Type="Int32" Nullable="false" />
+          <Property Name="Time_of_year" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Models" Relationship="Self.FK_Models_Season" FromRole="Season" ToRole="Models" />
+        </EntityType>
+        <EntityType Name="Staff">
+          <Key>
+            <PropertyRef Name="ID_Staff" />
+          </Key>
+          <Property Name="ID_Staff" Type="Int32" Nullable="false" />
+          <Property Name="ID_Authorization" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Patronymic" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Busyness" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Phone_number" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Authorization" Relationship="Self.FK_Staff_Authorization" FromRole="Staff" ToRole="Authorization" />
+          <NavigationProperty Name="Ordedrs" Relationship="Self.FK_Ordedrs_Staff" FromRole="Staff" ToRole="Ordedrs" />
+          <NavigationProperty Name="Repair_requests" Relationship="Self.FK_Repair_requests_Staff" FromRole="Staff" ToRole="Repair_requests" />
+        </EntityType>
+        <EntityType Name="Status_model">
+          <Key>
+            <PropertyRef Name="ID_Status_model" />
+          </Key>
+          <Property Name="ID_Status_model" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Models" Relationship="Self.FK_Models_Status_model" FromRole="Status_model" ToRole="Models" />
+        </EntityType>
+        <EntityType Name="Status_order">
+          <Key>
+            <PropertyRef Name="ID_Status_order" />
+          </Key>
+          <Property Name="ID_Status_order" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Queue" Relationship="Self.FK_Queue_Status" FromRole="Status_order" ToRole="Queue" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Accessories_Color_Accessories">
+          <End Role="Color_Accessories" Type="Self.Color_Accessories" Multiplicity="1" />
+          <End Role="Accessories" Type="Self.Accessories" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color_Accessories">
+              <PropertyRef Name="ID_Color_Accessories" />
+            </Principal>
+            <Dependent Role="Accessories">
+              <PropertyRef Name="ID_Color_Accessories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_More_Accessories">
+          <End Role="Accessories" Type="Self.Accessories" Multiplicity="1" />
+          <End Role="More" Type="Self.More" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Accessories">
+              <PropertyRef Name="ID_Accessories" />
+            </Principal>
+            <Dependent Role="More">
+              <PropertyRef Name="ID_Accessories" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Clients_Authorization">
+          <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
+          <End Role="Clients" Type="Self.Clients" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorization">
+              <PropertyRef Name="ID_Authorization" />
+            </Principal>
+            <Dependent Role="Clients">
+              <PropertyRef Name="ID_Authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Staff_Authorization">
+          <End Role="Authorization" Type="Self.Authorization" Multiplicity="1" />
+          <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Authorization">
+              <PropertyRef Name="ID_Authorization" />
+            </Principal>
+            <Dependent Role="Staff">
+              <PropertyRef Name="ID_Authorization" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordedrs_Clients">
+          <End Role="Clients" Type="Self.Clients" Multiplicity="1" />
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Clients">
+              <PropertyRef Name="ID_Clients" />
+            </Principal>
+            <Dependent Role="Ordedrs">
+              <PropertyRef Name="ID_Clients" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cloth_Color">
+          <End Role="Color" Type="Self.Color" Multiplicity="1" />
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Color">
+              <PropertyRef Name="ID_Color" />
+            </Principal>
+            <Dependent Role="Cloth">
+              <PropertyRef Name="ID_Color" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cloth_Density">
+          <End Role="Density" Type="Self.Density" Multiplicity="1" />
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Density">
+              <PropertyRef Name="ID_Density" />
+            </Principal>
+            <Dependent Role="Cloth">
+              <PropertyRef Name="ID_Density" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cloth_Resistance">
+          <End Role="Resistance" Type="Self.Resistance" Multiplicity="1" />
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Resistance">
+              <PropertyRef Name="ID_Resistance" />
+            </Principal>
+            <Dependent Role="Cloth">
+              <PropertyRef Name="ID_Resistance" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Models_Cloth">
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cloth">
+              <PropertyRef Name="ID_Cloth" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="ID_Cloth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_More_Cloth">
+          <End Role="Cloth" Type="Self.Cloth" Multiplicity="1" />
+          <End Role="More" Type="Self.More" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cloth">
+              <PropertyRef Name="ID_Cloth" />
+            </Principal>
+            <Dependent Role="More">
+              <PropertyRef Name="ID_Cloth" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repair_requests_Equipment">
+          <End Role="Equipment" Type="Self.Equipment" Multiplicity="1" />
+          <End Role="Repair_requests" Type="Self.Repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Equipment">
+              <PropertyRef Name="ID_Equipment" />
+            </Principal>
+            <Dependent Role="Repair_requests">
+              <PropertyRef Name="ID_Equipment" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Models_Season">
+          <End Role="Season" Type="Self.Season" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Season">
+              <PropertyRef Name="ID_Season" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="ID_Season" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Models_Status_model">
+          <End Role="Status_model" Type="Self.Status_model" Multiplicity="1" />
+          <End Role="Models" Type="Self.Models" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_model">
+              <PropertyRef Name="ID_Status_model" />
+            </Principal>
+            <Dependent Role="Models">
+              <PropertyRef Name="ID_Status_model" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_More_Models">
+          <End Role="Models" Type="Self.Models" Multiplicity="1" />
+          <End Role="More" Type="Self.More" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="ID_Models" />
+            </Principal>
+            <Dependent Role="More">
+              <PropertyRef Name="ID_Models" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordedrs_Models">
+          <End Role="Models" Type="Self.Models" Multiplicity="0..1" />
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Models">
+              <PropertyRef Name="ID_Models" />
+            </Principal>
+            <Dependent Role="Ordedrs">
+              <PropertyRef Name="ID_Models" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Ordedrs_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_Staff" />
+            </Principal>
+            <Dependent Role="Ordedrs">
+              <PropertyRef Name="ID_Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Queue_Ordedrs">
+          <End Role="Ordedrs" Type="Self.Ordedrs" Multiplicity="1" />
+          <End Role="Queue" Type="Self.Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ordedrs">
+              <PropertyRef Name="ID_Orders" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="ID_Orders" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Queue_Status">
+          <End Role="Status_order" Type="Self.Status_order" Multiplicity="1" />
+          <End Role="Queue" Type="Self.Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status_order">
+              <PropertyRef Name="ID_Status_order" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="ID_Status_order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Repair_requests_Staff">
+          <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+          <End Role="Repair_requests" Type="Self.Repair_requests" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Staff">
+              <PropertyRef Name="ID_Staff" />
+            </Principal>
+            <Dependent Role="Repair_requests">
+              <PropertyRef Name="ID_Staff" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="AtelierEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Accessories" EntityType="Self.Accessories" />
+          <EntitySet Name="Authorization" EntityType="Self.Authorization" />
+          <EntitySet Name="Clients" EntityType="Self.Clients" />
+          <EntitySet Name="Cloth" EntityType="Self.Cloth" />
+          <EntitySet Name="Color" EntityType="Self.Color" />
+          <EntitySet Name="Color_Accessories" EntityType="Self.Color_Accessories" />
+          <EntitySet Name="Density" EntityType="Self.Density" />
+          <EntitySet Name="Equipment" EntityType="Self.Equipment" />
+          <EntitySet Name="Models" EntityType="Self.Models" />
+          <EntitySet Name="More" EntityType="Self.More" />
+          <EntitySet Name="Ordedrs" EntityType="Self.Ordedrs" />
+          <EntitySet Name="Queue" EntityType="Self.Queue" />
+          <EntitySet Name="Repair_requests" EntityType="Self.Repair_requests" />
+          <EntitySet Name="Resistance" EntityType="Self.Resistance" />
+          <EntitySet Name="Season" EntityType="Self.Season" />
+          <EntitySet Name="Staff" EntityType="Self.Staff" />
+          <EntitySet Name="Status_model" EntityType="Self.Status_model" />
+          <EntitySet Name="Status_order" EntityType="Self.Status_order" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Accessories_Color_Accessories" Association="Self.FK_Accessories_Color_Accessories">
+            <End Role="Color_Accessories" EntitySet="Color_Accessories" />
+            <End Role="Accessories" EntitySet="Accessories" />
+          </AssociationSet>
+          <AssociationSet Name="FK_More_Accessories" Association="Self.FK_More_Accessories">
+            <End Role="Accessories" EntitySet="Accessories" />
+            <End Role="More" EntitySet="More" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Clients_Authorization" Association="Self.FK_Clients_Authorization">
+            <End Role="Authorization" EntitySet="Authorization" />
+            <End Role="Clients" EntitySet="Clients" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Staff_Authorization" Association="Self.FK_Staff_Authorization">
+            <End Role="Authorization" EntitySet="Authorization" />
+            <End Role="Staff" EntitySet="Staff" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordedrs_Clients" Association="Self.FK_Ordedrs_Clients">
+            <End Role="Clients" EntitySet="Clients" />
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cloth_Color" Association="Self.FK_Cloth_Color">
+            <End Role="Color" EntitySet="Color" />
+            <End Role="Cloth" EntitySet="Cloth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cloth_Density" Association="Self.FK_Cloth_Density">
+            <End Role="Density" EntitySet="Density" />
+            <End Role="Cloth" EntitySet="Cloth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cloth_Resistance" Association="Self.FK_Cloth_Resistance">
+            <End Role="Resistance" EntitySet="Resistance" />
+            <End Role="Cloth" EntitySet="Cloth" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Models_Cloth" Association="Self.FK_Models_Cloth">
+            <End Role="Cloth" EntitySet="Cloth" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_More_Cloth" Association="Self.FK_More_Cloth">
+            <End Role="Cloth" EntitySet="Cloth" />
+            <End Role="More" EntitySet="More" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repair_requests_Equipment" Association="Self.FK_Repair_requests_Equipment">
+            <End Role="Equipment" EntitySet="Equipment" />
+            <End Role="Repair_requests" EntitySet="Repair_requests" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Models_Season" Association="Self.FK_Models_Season">
+            <End Role="Season" EntitySet="Season" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Models_Status_model" Association="Self.FK_Models_Status_model">
+            <End Role="Status_model" EntitySet="Status_model" />
+            <End Role="Models" EntitySet="Models" />
+          </AssociationSet>
+          <AssociationSet Name="FK_More_Models" Association="Self.FK_More_Models">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="More" EntitySet="More" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordedrs_Models" Association="Self.FK_Ordedrs_Models">
+            <End Role="Models" EntitySet="Models" />
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Ordedrs_Staff" Association="Self.FK_Ordedrs_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Queue_Ordedrs" Association="Self.FK_Queue_Ordedrs">
+            <End Role="Ordedrs" EntitySet="Ordedrs" />
+            <End Role="Queue" EntitySet="Queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Queue_Status" Association="Self.FK_Queue_Status">
+            <End Role="Status_order" EntitySet="Status_order" />
+            <End Role="Queue" EntitySet="Queue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Repair_requests_Staff" Association="Self.FK_Repair_requests_Staff">
+            <End Role="Staff" EntitySet="Staff" />
+            <End Role="Repair_requests" EntitySet="Repair_requests" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище AtelierModelContainer" CdmEntityContainer="AtelierEntities">
+          <EntitySetMapping Name="Accessories">
+            <EntityTypeMapping TypeName="AtelierModel.Accessories">
+              <MappingFragment StoreEntitySet="Accessories">
+                <ScalarProperty Name="ID_Accessories" ColumnName="ID_Accessories" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Material" ColumnName="Material" />
+                <ScalarProperty Name="ID_Color_Accessories" ColumnName="ID_Color_Accessories" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Authorization">
+            <EntityTypeMapping TypeName="AtelierModel.Authorization">
+              <MappingFragment StoreEntitySet="Authorization">
+                <ScalarProperty Name="ID_Authorization" ColumnName="ID_Authorization" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Clients">
+            <EntityTypeMapping TypeName="AtelierModel.Clients">
+              <MappingFragment StoreEntitySet="Clients">
+                <ScalarProperty Name="ID_Clients" ColumnName="ID_Clients" />
+                <ScalarProperty Name="ID_Authorization" ColumnName="ID_Authorization" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Mail" ColumnName="Mail" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone_number" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cloth">
+            <EntityTypeMapping TypeName="AtelierModel.Cloth">
+              <MappingFragment StoreEntitySet="Cloth">
+                <ScalarProperty Name="ID_Cloth" ColumnName="ID_Cloth" />
+                <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
+                <ScalarProperty Name="ID_Resistance" ColumnName="ID_Resistance" />
+                <ScalarProperty Name="ID_Density" ColumnName="ID_Density" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Color">
+            <EntityTypeMapping TypeName="AtelierModel.Color">
+              <MappingFragment StoreEntitySet="Color">
+                <ScalarProperty Name="ID_Color" ColumnName="ID_Color" />
+                <ScalarProperty Name="Color1" ColumnName="Color" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Color_Accessories">
+            <EntityTypeMapping TypeName="AtelierModel.Color_Accessories">
+              <MappingFragment StoreEntitySet="Color_Accessories">
+                <ScalarProperty Name="ID_Color_Accessories" ColumnName="ID_Color_Accessories" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Density">
+            <EntityTypeMapping TypeName="AtelierModel.Density">
+              <MappingFragment StoreEntitySet="Density">
+                <ScalarProperty Name="ID_Density" ColumnName="ID_Density" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipment">
+            <EntityTypeMapping TypeName="AtelierModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipment">
+                <ScalarProperty Name="ID_Equipment" ColumnName="ID_Equipment" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Date_of_purchase" ColumnName="Date of purchase" />
+                <ScalarProperty Name="Year_of_release" ColumnName="Year of release" />
+                <ScalarProperty Name="Speed" ColumnName="Speed" />
+                <ScalarProperty Name="Stitch_Length" ColumnName="Stitch Length" />
+                <ScalarProperty Name="Stitch_Widths" ColumnName="Stitch Widths" />
+                <ScalarProperty Name="Size_of_the_loop_strip" ColumnName="Size of the loop strip" />
+                <ScalarProperty Name="Connecting_to_a_computer" ColumnName="Connecting to a computer" />
+                <ScalarProperty Name="Automatic_winding" ColumnName="Automatic winding" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Models">
+            <EntityTypeMapping TypeName="AtelierModel.Models">
+              <MappingFragment StoreEntitySet="Models">
+                <ScalarProperty Name="ID_Models" ColumnName="ID_Models" />
+                <ScalarProperty Name="ID_Cloth" ColumnName="ID_Cloth" />
+                <ScalarProperty Name="ID_Season" ColumnName="ID_Season" />
+                <ScalarProperty Name="ID_Status_model" ColumnName="ID_Status model" />
+                <ScalarProperty Name="ID_Accessories" ColumnName="ID_Accessories" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Purpose" ColumnName="Purpose" />
+                <ScalarProperty Name="Size" ColumnName="Size" />
+                <ScalarProperty Name="Lining" ColumnName="Lining" />
+                <ScalarProperty Name="Belt" ColumnName="Belt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="More">
+            <EntityTypeMapping TypeName="AtelierModel.More">
+              <MappingFragment StoreEntitySet="More">
+                <ScalarProperty Name="ID_More" ColumnName="ID_More" />
+                <ScalarProperty Name="ID_Models" ColumnName="ID_Models" />
+                <ScalarProperty Name="ID_Cloth" ColumnName="ID_Cloth" />
+                <ScalarProperty Name="ID_Accessories" ColumnName="ID_Accessories" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ordedrs">
+            <EntityTypeMapping TypeName="AtelierModel.Ordedrs">
+              <MappingFragment StoreEntitySet="Ordedrs">
+                <ScalarProperty Name="ID_Orders" ColumnName="ID_Orders" />
+                <ScalarProperty Name="ID_Staff" ColumnName="ID_Staff" />
+                <ScalarProperty Name="ID_Clients" ColumnName="ID_Clients" />
+                <ScalarProperty Name="ID_Models" ColumnName="ID_Models" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Cheque" ColumnName="Cheque" />
+                <ScalarProperty Name="Warranty" ColumnName="Warranty" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Queue">
+            <EntityTypeMapping TypeName="AtelierModel.Queue">
+              <MappingFragment StoreEntitySet="Queue">
+                <ScalarProperty Name="ID_Queue" ColumnName="ID_Queue" />
+                <ScalarProperty Name="ID_Orders" ColumnName="ID_Orders" />
+                <ScalarProperty Name="ID_Status_order" ColumnName="ID_Status order" />
+                <ScalarProperty Name="Urgency" ColumnName="Urgency" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Repair_requests">
+            <EntityTypeMapping TypeName="AtelierModel.Repair_requests">
+              <MappingFragment StoreEntitySet="Repair requests">
+                <ScalarProperty Name="ID_Repair_requests" ColumnName="ID_Repair requests" />
+                <ScalarProperty Name="ID_Equipment" ColumnName="ID_Equipment" />
+                <ScalarProperty Name="ID_Staff" ColumnName="ID_Staff" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Name_organization" ColumnName="Name organization" />
+                <ScalarProperty Name="The_nature_of_the_fault" ColumnName="The nature of the fault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Resistance">
+            <EntityTypeMapping TypeName="AtelierModel.Resistance">
+              <MappingFragment StoreEntitySet="Resistance">
+                <ScalarProperty Name="ID_Resistance" ColumnName="ID_Resistance" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Season">
+            <EntityTypeMapping TypeName="AtelierModel.Season">
+              <MappingFragment StoreEntitySet="Season">
+                <ScalarProperty Name="ID_Season" ColumnName="ID_Season" />
+                <ScalarProperty Name="Time_of_year" ColumnName="Time of year" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Staff">
+            <EntityTypeMapping TypeName="AtelierModel.Staff">
+              <MappingFragment StoreEntitySet="Staff">
+                <ScalarProperty Name="ID_Staff" ColumnName="ID_Staff" />
+                <ScalarProperty Name="ID_Authorization" ColumnName="ID_Authorization" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Surname" ColumnName="Surname" />
+                <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
+                <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+                <ScalarProperty Name="Busyness" ColumnName="Busyness" />
+                <ScalarProperty Name="Phone_number" ColumnName="Phone number" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_model">
+            <EntityTypeMapping TypeName="AtelierModel.Status_model">
+              <MappingFragment StoreEntitySet="Status model">
+                <ScalarProperty Name="ID_Status_model" ColumnName="ID_Status model" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status_order">
+            <EntityTypeMapping TypeName="AtelierModel.Status_order">
+              <MappingFragment StoreEntitySet="Status order">
+                <ScalarProperty Name="ID_Status_order" ColumnName="ID_Status order" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="AtelierModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

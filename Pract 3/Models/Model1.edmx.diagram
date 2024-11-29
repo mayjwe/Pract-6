@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="28caf03bce8444ea8832200930363a2d" Name="Diagram1">
+        <EntityTypeShape EntityType="AtelierModel.Accessories" Width="1.5" PointX="5.25" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Authorization" Width="1.5" PointX="6" PointY="15.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Clients" Width="1.5" PointX="8.25" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Cloth" Width="1.5" PointX="3" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Color" Width="1.5" PointX="0.75" PointY="5.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Color_Accessories" Width="1.5" PointX="3" PointY="11.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Density" Width="1.5" PointX="0.75" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Equipment" Width="1.5" PointX="8.25" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Models" Width="1.5" PointX="5.25" PointY="4.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.More" Width="1.5" PointX="7.5" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Ordedrs" Width="1.5" PointX="10.5" PointY="5" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Queue" Width="1.5" PointX="12.75" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Repair_requests" Width="1.5" PointX="10.5" PointY="9.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Resistance" Width="1.5" PointX="0.75" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Season" Width="1.5" PointX="3" PointY="2.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Staff" Width="1.5" PointX="8.25" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Status_model" Width="1.5" PointX="3" PointY="9" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.Status_order" Width="1.5" PointX="10.5" PointY="1.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="AtelierModel.sysdiagrams" Width="1.5" PointX="10.75" PointY="13" IsExpanded="true" />
+        <AssociationConnector Association="AtelierModel.FK_Accessories_Color_Accessories" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_More_Accessories" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Clients_Authorization" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Staff_Authorization" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Ordedrs_Clients" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Cloth_Color" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Cloth_Density" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Cloth_Resistance" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Models_Cloth" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_More_Cloth" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Repair_requests_Equipment" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Models_Season" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Models_Status_model" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_More_Models" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Ordedrs_Models" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Ordedrs_Staff" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Queue_Ordedrs" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Queue_Status" ManuallyRouted="false" />
+        <AssociationConnector Association="AtelierModel.FK_Repair_requests_Staff" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
