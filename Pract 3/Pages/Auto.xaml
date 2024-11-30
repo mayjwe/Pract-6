@@ -29,6 +29,7 @@
                 <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Войти" Click="btnEnter_Click"/>
             </StackPanel>
         </StackPanel>
+        <TextBlock x:Name="StatusTextBlock" Grid.Column="1" HorizontalAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FFE20B0B"/>
 
     </Grid>
 </Page>

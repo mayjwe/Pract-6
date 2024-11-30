@@ -1,129 +1,149 @@
-﻿using Pract_3.Models;
+﻿
+using Pract_3.Models;
 using Pract_3.Services;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Remoting.Messaging;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Pract_3.Pages
 {
-    /// <summary>
-    /// Логика взаимодействия для Autho.xaml
-    /// </summary>
     public partial class Auto : Page
     {
-        int click;
+        private int failedAttempts;
+        private DateTime lockEndTime;
+        private DispatcherTimer timer;
+
         public Auto()
         {
             InitializeComponent();
-            click = 0;
+            failedAttempts = 0;
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += Timer_Tick;
         }
-
-        private void btnEnterGuests_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Client(null, null));
-        }
-
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            click += 1;
+            if (failedAttempts >= 3 && DateTime.Now < lockEndTime)
+            {
+                MessageBox.Show("Слишком много неудачных попыток. Пожалуйста, подождите.");
+                return;
+            }
+
             string login = tbLogin.Text.Trim();
             string password = tbPassword.Text.Trim();
             string hashPassword = Hash.HashPassword(password);
 
             var db = Helper.GetContext();
+            var user = db.Clients.Where(x => x.Mail == login && x.Password == hashPassword).FirstOrDefault();
 
-            var user = db.Clients.Where(x => x.Mail == login && x.Password == password).FirstOrDefault();
-            if (click == 1)
+            if (user != null)
             {
-                if (user != null)
+                MessageBox.Show("Вы вошли под: " + user.Authorization.Role.ToString());
+                LoadPage(user.Authorization.Role.ToString(), user);
+                ResetFields();
+            }
+            else
+            {
+                failedAttempts++;
+
+                if (failedAttempts >= 3)
                 {
-                    MessageBox.Show("Вы вошли под: " + user.Authorization.Role.ToString());
-                    LoadPage(user.Authorization.Role.ToString(), user);
-                    tbLogin.Text = "";
-                    tbPassword.Text = "";
-                    tbCaptcha.Text = "";
-                    tblCaptcha.Visibility = Visibility.Hidden;
-                    tbCaptcha.Visibility = Visibility.Hidden;
+                    LockControls();
                 }
                 else
                 {
                     MessageBox.Show("Вы ввели логин или пароль неверно!");
-                    GenerateCapctcha();
-                    tbPassword.Text = "";
-                    tbCaptcha.Text = "";
-                }
-
-            }
-            else if (click > 1)
-            {
-                if (user != null && tbCaptcha.Text == tblCaptcha.Text)
-                {
-                    MessageBox.Show("Вы вошли под: " + user.Authorization.Role.ToString());
-                    LoadPage(user.Authorization.Role.ToString(), user);
-                    tbLogin.Text = "";
-                    tbPassword.Text = "";
-                    tbCaptcha.Text = "";
-                    tblCaptcha.Visibility = Visibility.Hidden;
-                    tbCaptcha.Visibility = Visibility.Hidden;
-                }
-                else
-                {
-                    MessageBox.Show("Введите данные заново!");
-                    GenerateCapctcha();
-                    tbPassword.Text = "";
-                    tbCaptcha.Text = "";
+                    tbLogin.Clear();
+                    tbPassword.Clear();
+                    tbCaptcha.Clear();
+                    GenerateCaptcha();
+                    tblCaptcha.Visibility = Visibility.Visible;
+                    tblCaptcha.Text = CaptchaGenerator.GenerateCaptchaText(6);
+ 
                 }
             }
-
-
-
         }
 
-        private void btnEnterGuest_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Client(null, null));
-        }
-        private void GenerateCapctcha()
+        private void GenerateCaptcha()
         {
             tbCaptcha.Visibility = Visibility.Visible;
             tblCaptcha.Visibility = Visibility.Visible;
 
-            string capctchaText = CaptchaGenerator.GenerateCaptchaText(6);
-            tblCaptcha.Text = capctchaText;
+            string captchaText = CaptchaGenerator.GenerateCaptchaText(6);
+            tblCaptcha.Text = captchaText;
             tblCaptcha.TextDecorations = TextDecorations.Strikethrough;
         }
-        private void LoadPage(string _role, Clients user)
-        {
-            click = 0;
-            switch (_role)
-            {
-                case "Клиент":
-                    NavigationService.Navigate(new Client(user, _role));
-                    break;
-                case "Сотрудник":
-                    NavigationService.Navigate(new StaffPage(user, _role));
-                    break;
 
+        private void LockControls()
+        {
+            tbLogin.IsEnabled = false;
+            tbPassword.IsEnabled = false;
+            tbCaptcha.IsEnabled = false;
+            btnEnter.IsEnabled = false;
+            btnEnterGuest.IsEnabled = false;
+            StatusTextBlock.Visibility = Visibility.Visible;
+            lockEndTime = DateTime.Now.AddSeconds(10);
+            timer.Start();
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            var remainingTime = lockEndTime - DateTime.Now;
+            if (remainingTime.TotalSeconds > 0)
+            {
+                StatusTextBlock.Text = $"Ожидайте: {remainingTime.Seconds} секунд";
+            }
+            else
+            {
+                tblCaptcha.Text = CaptchaGenerator.GenerateCaptchaText(6);
+                tbCaptcha.Text = "";
+                ResetControls();
+                StatusTextBlock.Visibility = Visibility.Hidden;
+                timer.Stop();
             }
         }
 
+        private void ResetControls()
+        {
+            tbLogin.IsEnabled = true;
+            tbPassword.IsEnabled = true;
+            btnEnter.IsEnabled = true;
+            tbCaptcha.IsEnabled = true;
+            btnEnterGuest.IsEnabled = true;
+            failedAttempts = 0;
+        }
 
+        private void ResetFields()
+        {
+            tbLogin.Text = "";
+            tbPassword.Text = "";
+            tbCaptcha.Text = "";
+            tblCaptcha.Visibility = Visibility.Hidden;
+            tbCaptcha.Visibility = Visibility.Hidden;
+        }
+
+        private void LoadPage(string _role, Clients user)
+        {
+            failedAttempts = 0;
+            switch (_role)
+            {
+                case "клиент":
+                    NavigationService.Navigate(new Client(user, _role));
+                    break;
+                case "сотрудник":
+                    NavigationService.Navigate(new StaffPage(user, _role));
+                    break;
+            }
+        }
+
+        private void btnEnterGuest_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
-
-
 }
+
 

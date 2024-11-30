@@ -9,6 +9,6 @@
       Title="StaffPage">
 
     <Grid>
-        <Label Content="Client" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FF00C013"/>
+        <Label x:Name="lbl_Role" Content="Client" HorizontalAlignment="Center" Margin="0,200,0,0" VerticalAlignment="Top" FontSize="14" Foreground="#FF00C013"/>
     </Grid>
 </Page>

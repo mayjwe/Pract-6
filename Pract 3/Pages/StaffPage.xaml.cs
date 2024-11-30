@@ -25,7 +25,7 @@ namespace Pract_3.Pages
         public StaffPage(Clients user, string role)
         {
             InitializeComponent();
-           // lbl_Role.Content = role;
+            lbl_Role.Content = role;
             //lbl_WelcomeMessage.Content = $"Добро пожаловать, {user.Mail}";
         }
     }
