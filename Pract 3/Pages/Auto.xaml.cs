@@ -1,5 +1,4 @@
-﻿
-using Pract_3.Models;
+﻿using Pract_3.Models;
 using Pract_3.Services;
 using System;
 using System.Linq;
@@ -32,6 +31,12 @@ namespace Pract_3.Pages
                 return;
             }
 
+            if (!IsWithinWorkingHours())
+            {
+                MessageBox.Show("Доступ запрещён. Рабочее время с 10:00 до 19:00.");
+                return;
+            }
+
             string login = tbLogin.Text.Trim();
             string password = tbPassword.Text.Trim();
             string hashPassword = Hash.HashPassword(password);
@@ -41,6 +46,7 @@ namespace Pract_3.Pages
 
             if (user != null)
             {
+                GreetUser(user);
                 MessageBox.Show("Вы вошли под: " + user.Authorization.Role.ToString());
                 LoadPage(user.Authorization.Role.ToString(), user);
                 ResetFields();
@@ -62,7 +68,6 @@ namespace Pract_3.Pages
                     GenerateCaptcha();
                     tblCaptcha.Visibility = Visibility.Visible;
                     tblCaptcha.Text = CaptchaGenerator.GenerateCaptchaText(6);
- 
                 }
             }
         }
@@ -141,9 +146,42 @@ namespace Pract_3.Pages
 
         private void btnEnterGuest_Click(object sender, RoutedEventArgs e)
         {
+        }
 
+        private bool IsWithinWorkingHours()
+        {
+            TimeSpan startTime = new TimeSpan(10, 0, 0);
+            TimeSpan endTime = new TimeSpan(19, 0, 0);
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+
+            return currentTime >= startTime && currentTime <= endTime;
+        }
+
+        private void GreetUser(Clients user)
+        {
+            string greeting = GetGreetingBasedOnTime();
+            MessageBox.Show($"{greeting} {user.Surname} {user.Name} {user.Patronymic}!");
+        }
+
+        private string GetGreetingBasedOnTime()
+        {
+            TimeSpan morningStart = new TimeSpan(10, 0, 0);
+            TimeSpan dayStart = new TimeSpan(12, 1, 0);
+            TimeSpan eveningStart = new TimeSpan(17, 1, 0);
+            TimeSpan currentTime = DateTime.Now.TimeOfDay;
+
+            if (currentTime >= morningStart && currentTime < dayStart)
+            {
+                return "Доброе утро";
+            }
+            else if (currentTime >= dayStart && currentTime < eveningStart)
+            {
+                return "Добрый день";
+            }
+            else
+            {
+                return "Добрый вечер";
+            }
         }
     }
 }
-
-
