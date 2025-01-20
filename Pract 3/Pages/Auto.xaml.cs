@@ -150,8 +150,8 @@ namespace Pract_3.Pages
 
         private bool IsWithinWorkingHours()
         {
-            TimeSpan startTime = new TimeSpan(10, 0, 0);
-            TimeSpan endTime = new TimeSpan(19, 0, 0);
+            TimeSpan startTime = new TimeSpan(0, 0, 0);
+            TimeSpan endTime = new TimeSpan(23, 59, 0);
             TimeSpan currentTime = DateTime.Now.TimeOfDay;
 
             return currentTime >= startTime && currentTime <= endTime;

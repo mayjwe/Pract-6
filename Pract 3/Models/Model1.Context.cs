@@ -24,7 +24,12 @@ namespace Pract_3.Models
         {
             throw new UnintentionalCodeFirstException();
         }
-    
+        /*
+        internal static object GetContext()
+        {
+            throw new NotImplementedException();
+        }
+        */
         public virtual DbSet<Accessories> Accessories { get; set; }
         public virtual DbSet<Authorization> Authorization { get; set; }
         public virtual DbSet<Clients> Clients { get; set; }
