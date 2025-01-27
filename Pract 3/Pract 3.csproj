@@ -149,6 +149,7 @@
     <Compile Include="Services\CaptchaGenerator.cs" />
     <Compile Include="Services\Hash.cs" />
     <Compile Include="Services\Hepler.cs" />
+    <Compile Include="Services\ValidateStaff.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using Pract_3;
 using Pract_3.Models;
+using Pract_3.Services;
 
 namespace Pract_3.Pages
 {
@@ -19,69 +19,49 @@ namespace Pract_3.Pages
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                // Проверка на корректность введённых данных
-                if (string.IsNullOrWhiteSpace(tbName.Text) ||
-                    string.IsNullOrWhiteSpace(tbSurname.Text) ||
-                    string.IsNullOrWhiteSpace(tbPatronymic.Text) ||
-                    string.IsNullOrWhiteSpace(tbBirthday.Text) ||
-                    string.IsNullOrWhiteSpace(tbBusyness.Text) ||
-                    string.IsNullOrWhiteSpace(tbPhoneNumber.Text) ||
-                    string.IsNullOrWhiteSpace(tbAuthorizationID.Text))
-                {
-                    MessageBox.Show("Пожалуйста, заполните все поля.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                // Проверка на целочисленное значение для ID авторизации и номера телефона
-                if (!int.TryParse(tbAuthorizationID.Text, out int authorizationID))
-                {
-                    MessageBox.Show("Неверный формат ID Авторизации. Пожалуйста, введите целое число.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                if (!int.TryParse(tbPhoneNumber.Text, out int phoneNumber))
-                {
-                    MessageBox.Show("Неверный формат номера телефона. Пожалуйста, введите только цифры.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                // Проверка даты рождения
-                if (!DateTime.TryParse(tbBirthday.Text, out DateTime birthday))
-                {
-                    MessageBox.Show("Неверный формат даты рождения. Пожалуйста, введите дату в формате дд.мм.гггг.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
-                    return;
-                }
-
-                // Создание нового сотрудника без указания ID_Staff
+          
                 var newStaff = new Staff
                 {
-                    ID_Authorization = authorizationID, // ID авторизации
-                    Name = tbName.Text,                  // Имя
-                    Surname = tbSurname.Text,            // Фамилия
-                    Patronymic = tbPatronymic.Text,      // Отчество
-                    Birthday = birthday,                 // Дата рождения
-                    Busyness = tbBusyness.Text,          // Занятость
-                    Phone_number = phoneNumber           // Номер телефона
+                    ID_Authorization = int.TryParse(tbAuthorizationID.Text, out var AuthorizationID) ? AuthorizationID : 0,
+                    Name = tbName.Text.Trim(),
+                    Surname = tbSurname.Text.Trim(),
+                    Patronymic = tbPatronymic.Text.Trim(),
+                    Birthday = DateTime.TryParse(tbBirthday.Text, out var Birthday) ? Birthday : DateTime.MinValue,
+                    Busyness = tbBusyness.Text.Trim(),
+                    Phone_number = int.TryParse(tbPhoneNumber.Text, out var PhoneNumber) ? PhoneNumber : 0,
                 };
+            ValidateStaff validate = new ValidateStaff();
+            string validationMessage = validate.ValidateStaf(newStaff);
+            if (!string.IsNullOrEmpty(validationMessage))
+            {
+                MessageBox.Show(validationMessage, "Ошибка валидации", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-                // Создание и использование контекста базы данных в одном блоке using
+            try
+            {
                 using (var context = Helper.GetContext())
                 {
-                    context.Staff.Add(newStaff);  // Добавление нового сотрудника в контекст
-                    context.SaveChanges();       // Сохранение изменений в базе данных
+                    context.Staff.Add(newStaff);
+                    context.SaveChanges();
                 }
 
-                MessageBox.Show("Сотрудник успешно добавлен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();      // Возврат на предыдущую страницу
+                MessageBox.Show("Сотрудник успешно добавлен", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"Ошибка при добавлении сотрудника: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show($"Ошибка при добавлении сотрудника: {ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+            using (var context = Helper.GetContext())
+                {
+                    context.Staff.Add(newStaff);
+                    context.SaveChanges();
+                }
+
+                MessageBox.Show("Сотрудник успешно добавлен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
+                NavigationService.GoBack();
+            
         }
-
-
     }
 }

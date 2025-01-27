@@ -11,6 +11,7 @@ namespace Pract_3.Models
 {
     using System;
     using System.Collections.Generic;
+        using System.ComponentModel.DataAnnotations;
     
     public partial class Staff
     {
@@ -22,12 +23,34 @@ namespace Pract_3.Models
         }
     
         public int ID_Staff { get; set; }
+
         public int ID_Authorization { get; set; }
+
+        [Required]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Длина имени должна быть от 3 до 15 символов")]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Длина фамилии должна быть от 3 до 20 символов")]
         public string Surname { get; set; }
+
+
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "Длина отчества должна быть от 2 до 20 символов")]
         public string Patronymic { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Date, ErrorMessage = "Дата рождения должна иметь правильный вид dd.mm.yyyy")]
         public System.DateTime Birthday { get; set; }
+      
+        
+
         public string Busyness { get; set; }
+
+
+
+        [Required]
+        [Range(1000000000, 9999999999, ErrorMessage = "Номер телефона находится в диппазоне от 1000000000 до 9999999999")]
         public int Phone_number { get; set; }
     
         public virtual Authorization Authorization { get; set; }

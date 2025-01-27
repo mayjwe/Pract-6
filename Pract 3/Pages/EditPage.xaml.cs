@@ -12,7 +12,6 @@ namespace Pract_3.Pages
         private object _currentEntity;
         private string _mode;
 
-        // Конструктор для инициализации страницы с объектом (Staff или Client) и режимом (редактирование или добавление)
         public EditPage(object entity, string mode)
         {
             InitializeComponent();
@@ -22,7 +21,6 @@ namespace Pract_3.Pages
             SetTitle();
         }
 
-        // Инициализация полей для отображения данных объекта
         private void InitializeFields()
         {
             if (_currentEntity is Staff staff)
@@ -41,7 +39,6 @@ namespace Pract_3.Pages
             }
         }
 
-        // Установка заголовка в зависимости от режима
         private void SetTitle()
         {
             if (_mode == "Добавление")
@@ -54,21 +51,18 @@ namespace Pract_3.Pages
             }
         }
 
-        // Обработчик кнопки "Сохранить"
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             var db = Helper.GetContext();
 
             try
             {
-                // Преобразование номера телефона в int
                 if (!int.TryParse(tbPhoneNumber.Text, out int phoneNumber))
                 {
                     MessageBox.Show("Введите корректный номер телефона.");
                     return;
                 }
 
-                // Проверка типа объекта и сохранение данных
                 if (_currentEntity is Staff staff)
                 {
                     staff.Name = tbName.Text;
@@ -93,10 +87,9 @@ namespace Pract_3.Pages
 
                 }
 
-                // Сохранение изменений в базе данных
                 db.SaveChanges();
                 MessageBox.Show("Изменения сохранены.");
-                NavigationService.GoBack(); // Возвращение на предыдущую страницу
+                NavigationService.GoBack();
             }
             catch (Exception ex)
             {
@@ -104,10 +97,6 @@ namespace Pract_3.Pages
             }
         }
 
-        // Обработчик кнопки "Отменить"
-        private void CancelButton_Click(object sender, RoutedEventArgs e)
-        {
-            NavigationService.GoBack(); // Возвращение на предыдущую страницу
-        }
+        
     }
 }

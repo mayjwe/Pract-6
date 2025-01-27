@@ -105,7 +105,6 @@ namespace Pract_3.Pages
                     ? (object)db.Staff.FirstOrDefault(s => s.Phone_number == selectedItem.PhoneNumber)
                     : (object)db.Clients.FirstOrDefault(c => c.Phone_number == selectedItem.PhoneNumber);
 
-                // Передаем выбранный объект и режим редактирования
                 NavigationService.Navigate(new EditPage(entity, "Редактирование"));
             }
         }
