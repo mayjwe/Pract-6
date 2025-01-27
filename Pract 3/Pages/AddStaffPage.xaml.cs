@@ -46,7 +46,7 @@ namespace Pract_3.Pages
                     context.SaveChanges();
                 }
 
-                MessageBox.Show("Сотрудник успешно добавлен", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Сотрудник успешно добавлен", "Успех", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.GoBack();
             }
             catch (Exception ex)
