@@ -14,11 +14,7 @@ namespace Pract_3
 
         public static AtelierEntities GetContext()
         {
-            if (_context == null)
-            {
-                _context = new AtelierEntities();
-            }
-            return _context;
+            return new AtelierEntities();
         }
         public void CreateClients(Clients client)
         {

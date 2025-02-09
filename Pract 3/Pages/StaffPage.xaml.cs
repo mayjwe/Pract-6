@@ -22,7 +22,7 @@ namespace Pract_3.Pages
     /// </summary>
     public partial class StaffPage : Page
     {
-        public StaffPage(Clients user, string role)
+        public StaffPage(Clients user)
         {
             //InitializeComponent();
             //lbl_Role.Content = role;

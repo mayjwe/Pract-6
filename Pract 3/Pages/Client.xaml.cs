@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Input;
 using Pract_3.Models;
 
@@ -13,7 +14,7 @@ namespace Pract_3.Pages
         private List<DisplayItem> _displayItems;
         private List<DisplayItem> _filteredItems;
 
-        public Client(Clients user, string role)
+        public Client(Clients user)
         {
             InitializeComponent();
             LoadClientsAndStaff();
@@ -28,6 +29,10 @@ namespace Pract_3.Pages
             public string PhotoUrl { get; set; }
         }
 
+
+        /// <summary>
+        /// Отображение пользователя
+        /// </summary>
         private void LoadClientsAndStaff()
         {
             try
@@ -60,6 +65,10 @@ namespace Pract_3.Pages
             }
         }
 
+        /// <summary>
+        /// Фильтр пользователей
+        /// </summary>
+        /// <param name="role"></param>
         private void FilterClients(string role)
         {
             if (role == "Все")
@@ -74,6 +83,11 @@ namespace Pract_3.Pages
             ClientsListView.ItemsSource = _filteredItems;
         }
 
+        /// <summary>
+        /// Выбор роли
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cbRole_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             var selectedItem = cbRole.SelectedItem as ComboBoxItem;
@@ -83,6 +97,11 @@ namespace Pract_3.Pages
             }
         }
 
+        /// <summary>
+        /// Текст
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
             string searchText = tbSearch.Text.ToLower();
@@ -91,11 +110,19 @@ namespace Pract_3.Pages
                 item.PhoneNumber.ToString().Contains(searchText)).ToList();
         }
 
+        /// <summary>
+        /// Переход на страницу добавления
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AddStaffPage());
         }
 
+        /// <summary>
+        /// Обработчик двойного клика
+        /// </summary>
         private void ClientsListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             if (ClientsListView.SelectedItem is DisplayItem selectedItem)
@@ -106,6 +133,29 @@ namespace Pract_3.Pages
                     : (object)db.Clients.FirstOrDefault(c => c.Phone_number == selectedItem.PhoneNumber);
 
                 NavigationService.Navigate(new EditPage(entity, "Редактирование"));
+            }
+        }
+
+        /// <summary>
+        /// ПДФ
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrintListButton_Click(object sender, RoutedEventArgs e)
+        {
+            // Получаем FlowDocument из FlowDocumentReader 
+
+            FlowDocument doc = flowDocumentReader.Document;
+            if (doc == null)
+            {
+                MessageBox.Show("Документ не найден.");
+                return;
+            }
+            PrintDialog printDialog = new PrintDialog();
+            if (printDialog.ShowDialog() == true)
+            {
+                IDocumentPaginatorSource idpSource = doc;
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников"); 
             }
         }
     }

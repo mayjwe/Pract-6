@@ -17,6 +17,11 @@ namespace Pract_3.Pages
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Добавление пользователя
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
           
@@ -54,10 +59,10 @@ namespace Pract_3.Pages
                 MessageBox.Show($"Ошибка при добавлении сотрудника: {ex.Message}", "Ошибка!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             using (var context = Helper.GetContext())
-                {
+            {
                     context.Staff.Add(newStaff);
                     context.SaveChanges();
-                }
+            }
 
                 MessageBox.Show("Сотрудник успешно добавлен", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
                 NavigationService.GoBack();

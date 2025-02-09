@@ -4,6 +4,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace Pract_3.Pages
@@ -23,6 +24,11 @@ namespace Pract_3.Pages
             timer.Tick += Timer_Tick;
         }
 
+        /// <summary>
+        /// Обработчик нажатия кнопки входа
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
             if (failedAttempts >= 3 && DateTime.Now < lockEndTime)
@@ -72,6 +78,9 @@ namespace Pract_3.Pages
             }
         }
 
+        /// <summary>
+        /// Генерация капчи
+        /// </summary>
         private void GenerateCaptcha()
         {
             tbCaptcha.Visibility = Visibility.Visible;
@@ -82,6 +91,9 @@ namespace Pract_3.Pages
             tblCaptcha.TextDecorations = TextDecorations.Strikethrough;
         }
 
+        /// <summary>
+        /// Блокировка элементов ввода при превышении количества попыток входа
+        /// </summary>
         private void LockControls()
         {
             tbLogin.IsEnabled = false;
@@ -94,6 +106,11 @@ namespace Pract_3.Pages
             timer.Start();
         }
 
+        /// <summary>
+        /// Таймер обратного отсчёта блокировки
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Timer_Tick(object sender, EventArgs e)
         {
             var remainingTime = lockEndTime - DateTime.Now;
@@ -110,7 +127,9 @@ namespace Pract_3.Pages
                 timer.Stop();
             }
         }
-
+        /// <summary>
+        /// Разблокировка элементов ввода
+        /// </summary>
         private void ResetControls()
         {
             tbLogin.IsEnabled = true;
@@ -121,6 +140,9 @@ namespace Pract_3.Pages
             failedAttempts = 0;
         }
 
+        /// <summary>
+        /// Очистка полей ввода
+        /// </summary>
         private void ResetFields()
         {
             tbLogin.Text = "";
@@ -129,17 +151,21 @@ namespace Pract_3.Pages
             tblCaptcha.Visibility = Visibility.Hidden;
             tbCaptcha.Visibility = Visibility.Hidden;
         }
-
+        /// <summary>
+        /// Загрузка страницы в зависимости от роли пользователя 
+        /// </summary>
+        /// <param name="_role"></param>
+        /// <param name="user"></param>
         private void LoadPage(string _role, Clients user)
         {
             failedAttempts = 0;
             switch (_role)
             {
                 case "клиент":
-                    NavigationService.Navigate(new Client(user, _role));
+                    NavigationService.Navigate(new Client(user));
                     break;
                 case "сотрудник":
-                    NavigationService.Navigate(new StaffPage(user, _role));
+                    NavigationService.Navigate(new StaffPage(user));
                     break;
             }
         }
@@ -148,6 +174,11 @@ namespace Pract_3.Pages
         {
         }
 
+
+        /// <summary>
+        /// Проверка на соответствие рабочего времени
+        /// </summary>
+        /// <returns></returns>
         private bool IsWithinWorkingHours()
         {
             TimeSpan startTime = new TimeSpan(0, 0, 0);
@@ -163,6 +194,10 @@ namespace Pract_3.Pages
             MessageBox.Show($"{greeting} {user.Surname} {user.Name} {user.Patronymic}!");
         }
 
+        /// <summary>
+        /// Вывод сообщения в зависимости от времени
+        /// </summary>
+        /// <returns></returns>
         private string GetGreetingBasedOnTime()
         {
             TimeSpan morningStart = new TimeSpan(10, 0, 0);
@@ -182,6 +217,30 @@ namespace Pract_3.Pages
             {
                 return "Добрый вечер";
             }
+        }
+
+        /// <summary>
+        /// Кнопка забытого пароля
+        /// </summary>
+        /// <param object="sender"></param>
+        /// <param MouseButtonEventArgs="e"></param>
+        private void tblForgotPassword_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if (tbLogin.Text != null)
+            {
+                string login = tbLogin.Text;
+                tbPassword.Clear();
+                NavigationService.Navigate(new Password(login));
+            }
+            else
+            {
+                MessageBox.Show("Введите логин пользователя");
+            }
+        }
+
+        private void btnForgotPassword_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

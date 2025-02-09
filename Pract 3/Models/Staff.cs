@@ -35,7 +35,7 @@ namespace Pract_3.Models
         public string Surname { get; set; }
 
 
-        [StringLength(20, MinimumLength = 2, ErrorMessage = "Длина отчества должна быть от 2 до 20 символов")]
+       // [StringLength(20, MinimumLength = 2, ErrorMessage = "Длина отчества должна быть от 2 до 20 символов")]
         public string Patronymic { get; set; }
 
 
@@ -50,7 +50,7 @@ namespace Pract_3.Models
 
 
         [Required]
-        [Range(1000000000, 9999999999, ErrorMessage = "Номер телефона находится в диппазоне от 1000000000 до 9999999999")]
+        [Range(1000000000, 9999999999, ErrorMessage = "Номер телефона должен содержать цифры")]
         public int Phone_number { get; set; }
     
         public virtual Authorization Authorization { get; set; }

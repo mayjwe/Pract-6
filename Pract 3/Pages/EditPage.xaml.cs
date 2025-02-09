@@ -21,6 +21,9 @@ namespace Pract_3.Pages
             SetTitle();
         }
 
+        /// <summary>
+        /// Инициализация полей
+        /// </summary>
         private void InitializeFields()
         {
             if (_currentEntity is Staff staff)
@@ -39,6 +42,7 @@ namespace Pract_3.Pages
             }
         }
 
+
         private void SetTitle()
         {
             if (_mode == "Добавление")
@@ -51,6 +55,10 @@ namespace Pract_3.Pages
             }
         }
 
+
+        /// <summary>
+        /// Обработчик сохранения
+        /// </summary>
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
             var db = Helper.GetContext();
@@ -96,7 +104,5 @@ namespace Pract_3.Pages
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
             }
         }
-
-        
     }
 }

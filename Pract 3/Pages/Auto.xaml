@@ -22,12 +22,13 @@
             <TextBox x:Name="tbPassword"/>
             <TextBlock Visibility  ="Hidden" x:Name="tblCaptcha" Text="Капча"/>
             <TextBox Visibility  ="Hidden" x:Name="tbCaptcha"/>
-
             <TextBlock HorizontalAlignment="Center" Visibility="Hidden" x:Name="txtBlockTimer"/>
             <StackPanel Orientation="Horizontal" Height="80" HorizontalAlignment="Center">
                 <Button x:Name="btnEnterGuest" Margin="5,15,5,5" Content="Войти как гость" Click="btnEnterGuest_Click"/>
                 <Button x:Name="btnEnter" Margin="5,15,5,5" Content="Войти" Click="btnEnter_Click"/>
+
             </StackPanel>
+            <TextBlock x:Name="tblForgotPassword" Text="Не помню пароль" TextDecorations="Underline" MouseDown="tblForgotPassword_MouseDown" Cursor="Hand"/>
         </StackPanel>
         <TextBlock x:Name="StatusTextBlock" Grid.Column="1" HorizontalAlignment="Center" Margin="0,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Foreground="#FFE20B0B"/>
 
