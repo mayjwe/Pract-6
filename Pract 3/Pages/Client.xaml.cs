@@ -1,11 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Xml.Linq;
 using Pract_3.Models;
+
 
 namespace Pract_3.Pages
 {
@@ -155,8 +159,78 @@ namespace Pract_3.Pages
             if (printDialog.ShowDialog() == true)
             {
                 IDocumentPaginatorSource idpSource = doc;
-                printDialog.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников"); 
+                printDialog.PrintDocument(idpSource.DocumentPaginator, "Список сотрудников и клиентов"); 
             }
         }
+
+        /// <summary>
+        /// Информация о моделях
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void PrintModelOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var db = Helper.GetContext();
+                var modelsList = db.Models.Select(m => new
+                {
+                    Name = m.Name,
+                    Purpose = m.Purpose,
+                    Size = m.Size.ToString(),
+
+                }).ToList();
+                if (modelsList.Count == 0)
+                {
+                    MessageBox.Show("Нет моделей");
+                    return;
+                }
+                FlowDocument doc = new FlowDocument();
+                doc.Blocks.Add(new Paragraph(new Run("Информация о моделях"))
+                {
+                    FontSize = 18,
+                    FontWeight = FontWeights.Bold,
+                    TextAlignment = TextAlignment.Center
+                });
+
+                Table table = new Table();
+                table.Columns.Add(new TableColumn { Width = new GridLength(150) });
+                table.Columns.Add(new TableColumn { Width = new GridLength(150) });
+                table.Columns.Add(new TableColumn { Width = new GridLength(80) });
+
+                TableRowGroup headerGroup = new TableRowGroup();
+                TableRow headerRow = new TableRow();
+                headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Название"))) { FontWeight = FontWeights.Bold });
+                headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Назначение"))) { FontWeight = FontWeights.Bold });
+                headerRow.Cells.Add(new TableCell(new Paragraph(new Run("Размер"))) { FontWeight = FontWeights.Bold });
+
+                headerGroup.Rows.Add(headerRow);
+                table.RowGroups.Add(headerGroup);
+
+                TableRowGroup rowGroup = new TableRowGroup();
+                foreach (var model in modelsList)
+                {
+                    TableRow row = new TableRow();
+                    row.Cells.Add(new TableCell(new Paragraph(new Run(model.Name))));
+                    row.Cells.Add(new TableCell(new Paragraph(new Run(model.Purpose))));
+                    row.Cells.Add(new TableCell(new Paragraph(new Run(model.Size))));
+                    rowGroup.Rows.Add(row);
+                }
+                table.RowGroups.Add(rowGroup);
+                doc.Blocks.Add(table);
+                PrintDialog printDialog = new PrintDialog();
+                if (printDialog.ShowDialog() == true)
+                {
+                    IDocumentPaginatorSource idpSource = doc;
+                    printDialog.PrintDocument(idpSource.DocumentPaginator, "Информация о моделях");
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ошибка при печати: " + ex.Message);
+            }
+        }
+
+
     }
 }

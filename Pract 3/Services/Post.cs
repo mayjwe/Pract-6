@@ -12,8 +12,10 @@ namespace Pract_3.Services
     internal class Post
     {
         /// <summary>
-        /// Почта
+        /// 
         /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public string SendEmail(string email)
         {
             try

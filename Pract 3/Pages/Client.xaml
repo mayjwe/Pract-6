@@ -29,7 +29,7 @@
 
                         <Button Content="Добавить" HorizontalAlignment="Center" Margin="10" Click="AddButton_Click" />
                         <Button Content="Печать" HorizontalAlignment="Center" Margin="10" Click="PrintListButton_Click" />
-                        <Button Content="Информация о моделях" HorizontalAlignment="Center" Margin="10" Click="PrintListButton_Click" Width="226" />
+                        <Button Content="Информация о моделях" HorizontalAlignment="Center" Margin="10" Click="PrintModelOrderButton_Click" Width="226" />
 
                         <ListView x:Name="ClientsListView" MouseDoubleClick="ClientsListView_MouseDoubleClick" VerticalAlignment="Center" Margin="5, 0, 5, 0" av:ItemsSource="{av:SampleData ItemCount=5}">
                             <ListView.ItemsPanel>
