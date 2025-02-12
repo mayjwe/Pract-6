@@ -32,13 +32,5 @@ namespace Pract_3.Models
         public virtual Authorization Authorization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordedrs> Ordedrs { get; set; }
-
-        public string FullName 
-        {
-            get 
-            {
-                return this.Name + " " + this.Surname;
-            }
-        }
     }
 }

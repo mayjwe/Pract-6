@@ -1,5 +1,4 @@
 ﻿using Pract_3.Models;
-using Pract_3.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,32 +40,5 @@ namespace Pract_3
             }
         }
 
-        private void UpdateClients(Clients client)
-        {
-            _context.Entry(client).State = System.Data.Entity.EntityState.Modified;
-            _context.SaveChanges();
-        }
-
-        private void RemoveClients(int ID_Clients)
-        {
-            var client = _context.Clients.Find(ID_Clients);
-            _context.Clients.Remove(client);
-            _context.SaveChanges();
-        }
-
-        private List<Clients> FiltrClients()
-        {
-            return _context.Clients.Where(x => x.Name.StartsWith("M") || x.Name.StartsWith("A")).ToList();
-        }
-
-        private List<Clients> SortClients()
-        {
-            return _context.Clients.OrderBy(x => x.Name).ToList();
-        }
-
-        private string GetClientTypes(Clients client)
-        {
-            return client.Name.GetType().ToString();
-        }
     }
 }
