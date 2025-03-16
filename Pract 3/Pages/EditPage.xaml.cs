@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Pract_3.Models;
+using Pract_3.Services;
 using System.Data.Entity;
 
 namespace Pract_3.Pages
@@ -146,5 +147,20 @@ namespace Pract_3.Pages
                 MessageBox.Show($"Ошибка при сохранении данных: {ex.Message}");
             }
         }
+
+        private void btnCreateFile_Click(object sender, RoutedEventArgs e)
+        {
+            if (_entityId.HasValue)
+            {
+                Contract contract = new Contract();
+                contract.GenerateContract(_entityId.Value);
+            }
+            else
+            {
+                MessageBox.Show("Сотрудник не выбран или не загружен.", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+
     }
 }

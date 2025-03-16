@@ -11,7 +11,8 @@ namespace Pract_3.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Staff
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -20,16 +21,35 @@ namespace Pract_3.Models
             this.Ordedrs = new HashSet<Ordedrs>();
             this.Repair_requests = new HashSet<Repair_requests>();
         }
-    
+
         public int ID_Staff { get; set; }
+
         public int ID_Authorization { get; set; }
+
+        [Required]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Длина имени должна быть от 3 до 15 символов")]
         public string Name { get; set; }
+
+        [Required]
+        [StringLength(15, MinimumLength = 3, ErrorMessage = "Длина фамилии должна быть от 3 до 20 символов")]
         public string Surname { get; set; }
+
+
+        [StringLength(20, MinimumLength = 2, ErrorMessage = "Длина отчества должна быть от 2 до 20 символов")]
         public string Patronymic { get; set; }
+
+
+        [Required]
+        [DataType(DataType.Date, ErrorMessage = "Дата рождения должна иметь правильный вид dd.mm.yyyy")]
         public System.DateTime Birthday { get; set; }
+
+
+
         public string Busyness { get; set; }
+
+
         public int Phone_number { get; set; }
-    
+
         public virtual Authorization Authorization { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Ordedrs> Ordedrs { get; set; }

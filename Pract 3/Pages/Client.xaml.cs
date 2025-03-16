@@ -9,7 +9,8 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Pract_3.Models;
-
+using Pract_3.Services;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace Pract_3.Pages
 {
@@ -231,6 +232,46 @@ namespace Pract_3.Pages
             }
         }
 
+
+        private void TableButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                var staffList = Helper.GetContext().Staff.ToList();
+
+                var excelApp = new Excel.Application();
+                excelApp.Visible = true;
+                var workbook = excelApp.Workbooks.Add();
+                var workSheet = (Excel.Worksheet)workbook.ActiveSheet;
+
+                workSheet.Cells[1, 1] = "ID_Staff";
+                workSheet.Cells[1, 2] = "Name";
+                workSheet.Cells[1, 3] = "Surname";
+                workSheet.Cells[1, 4] = "Patronymic";
+                workSheet.Cells[1, 5] = "Birthday";
+                workSheet.Cells[1, 6] = "Busyness";
+                workSheet.Cells[1, 7] = "Phone number";
+
+                int row = 2;
+                foreach (var staff in staffList)
+                {
+                    workSheet.Cells[row, 1] = staff.ID_Staff;
+                    workSheet.Cells[row, 2] = staff.Name;
+                    workSheet.Cells[row, 3] = staff.Surname;
+                    workSheet.Cells[row, 4] = staff.Patronymic;
+                    workSheet.Cells[row, 5] = staff.Birthday;
+                    workSheet.Cells[row, 6] = staff.Busyness;
+                    workSheet.Cells[row, 7] = staff.Phone_number;
+                    row++;
+                }
+
+                workSheet.Columns.AutoFit();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Ошибка экспорта: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
 
     }
 }

@@ -1,9 +1,12 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
-using Pract_3;
-using Pract_3.Models;
+﻿using Pract_3.Models;
+using Pract_3.Pages;
 using Pract_3.Services;
+using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows;
+using System;
+using Xceed.Words.NET;
+
 
 namespace Pract_3.Pages
 {
@@ -24,17 +27,18 @@ namespace Pract_3.Pages
         /// <param name="e"></param>
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
-          
-                var newStaff = new Staff
-                {
-                    ID_Authorization = int.TryParse(tbAuthorizationID.Text, out var AuthorizationID) ? AuthorizationID : 0,
-                    Name = tbName.Text.Trim(),
-                    Surname = tbSurname.Text.Trim(),
-                    Patronymic = tbPatronymic.Text.Trim(),
-                    Birthday = DateTime.TryParse(tbBirthday.Text, out var Birthday) ? Birthday : DateTime.MinValue,
-                    Busyness = tbBusyness.Text.Trim(),
-                    Phone_number = int.TryParse(tbPhoneNumber.Text, out var PhoneNumber) ? PhoneNumber : 0,
-                };
+
+            var newStaff = new Staff
+            {
+                ID_Authorization = int.TryParse(tbAuthorizationID.Text, out var AuthorizationID) ? AuthorizationID : 0,
+                Name = tbName.Text.Trim(),
+                Surname = tbSurname.Text.Trim(),
+                Patronymic = tbPatronymic.Text.Trim(),
+                Birthday = DateTime.TryParse(tbBirthday.Text, out var Birthday) ? Birthday : DateTime.MinValue,
+                Busyness = tbBusyness.Text.Trim(),
+                Phone_number = int.TryParse(tbPhoneNumber.Text, out var PhoneNumber) ? PhoneNumber : 0,
+            };
+
             ValidateStaff validate = new ValidateStaff();
             string validationMessage = validate.ValidateStaf(newStaff);
             if (!string.IsNullOrEmpty(validationMessage))
@@ -60,13 +64,15 @@ namespace Pract_3.Pages
             }
             using (var context = Helper.GetContext())
             {
-                    context.Staff.Add(newStaff);
-                    context.SaveChanges();
+                context.Staff.Add(newStaff);
+                context.SaveChanges();
             }
 
-                MessageBox.Show("Сотрудник успешно добавлен", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
-                NavigationService.GoBack();
-            
+            MessageBox.Show("Сотрудник успешно добавлен", "Успех!", MessageBoxButton.OK, MessageBoxImage.Information);
+            NavigationService.GoBack();
+
         }
+
+       
     }
 }
